@@ -1,8 +1,9 @@
-package example.mapping.domain;
+package jpabook.jpashop.domain;
 
 import javax.persistence.Entity;
 
-public class Movie extends Item2{
+@Entity
+public class Movie extends Item{
     private String director;
     private String actor;
 
@@ -21,6 +22,4 @@ public class Movie extends Item2{
     public void setActor(String actor) {
         this.actor = actor;
     }
-
-
 }

@@ -2,9 +2,7 @@ package example.mapping.domain;
 
 import javax.persistence.*;
 
-@Entity
-@Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn
+
 public class Item2 {
     @Id @GeneratedValue
     private Long id;
