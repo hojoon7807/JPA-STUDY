@@ -8,7 +8,7 @@ public class Order3 {
     private Long id;
     private int orderAmount;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
     private Product product;
 

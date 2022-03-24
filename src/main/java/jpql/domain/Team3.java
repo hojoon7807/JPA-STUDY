@@ -14,13 +14,13 @@ public class Team3 {
     private String name;
 
     @OneToMany(mappedBy = "team")
-    private List<Memeber3> memebers = new ArrayList<>();
+    private List<Member3> memebers = new ArrayList<>();
 
-    public List<Memeber3> getMemebers() {
+    public List<Member3> getMemebers() {
         return memebers;
     }
 
-    public void setMemebers(List<Memeber3> memebers) {
+    public void setMemebers(List<Member3> memebers) {
         this.memebers = memebers;
     }
 

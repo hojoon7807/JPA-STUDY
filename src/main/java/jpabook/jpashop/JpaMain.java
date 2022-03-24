@@ -1,22 +1,10 @@
 package jpabook.jpashop;
 
-import example.mapping.domain.Movie;
-import hellojpa.Member2;
-import hellojpa.Team;
-import jpabook.jpashop.domain.Book;
-import jpabook.jpashop.domain.Member;
-import jpabook.jpashop.domain.Order;
-import jpabook.jpashop.domain.OrderItem;
-import jpql.domain.Memeber3;
+import jpql.domain.Member3;
+import jpql.domain.Member3DTO;
 import jpql.domain.Team3;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
+import javax.persistence.*;
 import java.util.List;
 
 public class JpaMain {
@@ -32,11 +20,29 @@ public class JpaMain {
             team.setName("OB");
             em.persist(team);
 
-            Memeber3 member = new Memeber3();
+            Member3 member = new Member3();
             member.setAge(20);
             member.setUsername("Hojoon");
-            member.setTeam(team);
+            member.changeTeam(team);
             em.persist(member);
+
+            em.flush();
+            em.clear();
+            List<Member3DTO> resultList = em.createQuery("select new jpql.domain.Member3DTO(m.age,m.username) from Member3 as m", Member3DTO.class)
+                    .getResultList();
+
+            List<Member3> resultList1 = em.createQuery("select m from Member3 as m order by m.age desc", Member3.class)
+                    .setFirstResult(0)
+                    .setMaxResults(5)
+                    .getResultList();
+
+            List<Member3> resultList2 = em.createQuery("select m from Member3 as m inner join m.team t", Member3.class)
+                    .getResultList();
+
+
+            Member3DTO memberDTO = resultList.get(0);
+            System.out.println("memberDTO.getUsername() = " + memberDTO.getUsername());
+            System.out.println("memberDTO.getUsername() = " + memberDTO.getAge());
 
             tx.commit();
         }catch (Exception e){
