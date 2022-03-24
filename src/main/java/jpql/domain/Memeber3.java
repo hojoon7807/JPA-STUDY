@@ -1,21 +1,17 @@
-package hellojpa;
+package jpql.domain;
 
 import javax.persistence.*;
 
-
-public class Member2 {
+@Entity
+public class Memeber3 {
     @Id @GeneratedValue
-    @Column(name = "member_id")
     private Long id;
-
     private String username;
+    private int age;
 
     @ManyToOne
     @JoinColumn(name = "team_id")
-    private Team team;
-
-    public Member2() {
-    }
+    private Team3 team;
 
     public Long getId() {
         return id;
@@ -23,6 +19,14 @@ public class Member2 {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Team3 getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team3 team) {
+        this.team = team;
     }
 
     public String getUsername() {
@@ -33,12 +37,11 @@ public class Member2 {
         this.username = username;
     }
 
-    public Team getTeam() {
-        return team;
+    public int getAge() {
+        return age;
     }
 
-    public void changeTeam(Team team) {
-        this.team = team;
-        team.getMembers().add(this);
+    public void setAge(int age) {
+        this.age = age;
     }
 }
